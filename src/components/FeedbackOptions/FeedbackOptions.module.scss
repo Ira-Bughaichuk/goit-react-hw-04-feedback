@@ -1,0 +1,21 @@
+.list{
+    margin: 20px 0;
+    display: inline-flex;
+    
+}
+.button {
+    outline: none;
+    padding: 10px 15px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid black;
+    gap: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+    text-transform: capitalize;
+   
+   
+}
+.button:hover{
+    background-color: aquamarine;
+}
