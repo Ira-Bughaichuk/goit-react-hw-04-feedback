@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import s from './FeedbackOptions.module.scss';
 
 function FeedbackOptions({ options, onLeaveFeedback }) {
@@ -18,7 +18,7 @@ function FeedbackOptions({ options, onLeaveFeedback }) {
   return <ul> {element}</ul>;
 }
 export default FeedbackOptions;
-// key={option}
-// FeedbackOptions.propTypes = {
-//   options: PropTypes.arrayOf(PropTypes.string),
-// };
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string),
+};

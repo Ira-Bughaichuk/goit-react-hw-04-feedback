@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import FeedbackOptions from './components/FeedbackOptions/FeedbackOptions';
 import Statistics from './components/Statistics/Statistics';
 import Section from './components/Section/Section';
@@ -23,29 +23,7 @@ export const App = () => {
     const percentage = ((good / total) * 100).toFixed();
     return percentage;
   }
-  //  state = {
-  //    good: 0,
-  //    neutral: 0,
-  //    bad: 0,
 
-  //   }
-  // handleLeaveFeedback = (e) => {
-  //   const { name } = e.target;
-  //    this.setState((prevState) => ({ [name]: prevState[name] + 1 }));
-  // }
-
-  // countTotalFeedback() {
-  //   const { good, neutral, bad } = this.state;
-  //   const total = good + neutral + bad;
-  //   return total;
-  // }
-
-  // countPositiveFeedbackPercentage() {
-  //   const { good } = this.state;
-  //   const total = this.countTotalFeedback();
-  //    const percentage = ((good / total) *100).toFixed();
-  //   return percentage;
-  // }
   const nameFeedback = Object.keys(options);
   return (
     <>
