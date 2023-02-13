@@ -1,54 +1,70 @@
-import React, {Component} from 'react';
+import React, { useState, useEffect } from 'react';
 import FeedbackOptions from './components/FeedbackOptions/FeedbackOptions';
 import Statistics from './components/Statistics/Statistics';
 import Section from './components/Section/Section';
 
+export const App = () => {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
+  const options = { good: setGood, neutral: setNeutral, bad: setBad };
 
-export class App extends Component {
- state = {
-   good: 0,
-   neutral: 0,
-   bad: 0,
-  
-  }
-  
-  handleLeaveFeedback = (e) => { 
+  const handleChange = e => {
     const { name } = e.target;
-     this.setState((prevState) => ({ [name]: prevState[name] + 1 }));
-  }
- 
-  countTotalFeedback() {
-    const { good, neutral, bad } = this.state;
+    options[name](prev => prev + 1);
+  };
+
+  function countTotalFeedback() {
     const total = good + neutral + bad;
-   
     return total;
   }
-  
-  countPositiveFeedbackPercentage() {
-    const { good } = this.state;
-    const total = this.countTotalFeedback();
-
-     const percentage = ((good / total) *100).toFixed();
-   
+  function countPositiveFeedbackPercentage() {
+    const total = countTotalFeedback();
+    const percentage = ((good / total) * 100).toFixed();
     return percentage;
   }
-  render() {
-    const { good, neutral, bad } = this.state;
-    
-    
-    return (
-      <>
-      
+  //  state = {
+  //    good: 0,
+  //    neutral: 0,
+  //    bad: 0,
 
-      <Section title="Please leave feedback">  
-        <FeedbackOptions options={Object.keys(this.state)} onLeaveFeedback={this.handleLeaveFeedback} />
+  //   }
+  // handleLeaveFeedback = (e) => {
+  //   const { name } = e.target;
+  //    this.setState((prevState) => ({ [name]: prevState[name] + 1 }));
+  // }
+
+  // countTotalFeedback() {
+  //   const { good, neutral, bad } = this.state;
+  //   const total = good + neutral + bad;
+  //   return total;
+  // }
+
+  // countPositiveFeedbackPercentage() {
+  //   const { good } = this.state;
+  //   const total = this.countTotalFeedback();
+  //    const percentage = ((good / total) *100).toFixed();
+  //   return percentage;
+  // }
+  const nameFeedback = Object.keys(options);
+  return (
+    <>
+      <Section title="Please leave feedback">
+        <FeedbackOptions
+          options={nameFeedback}
+          onLeaveFeedback={handleChange}
+        />
       </Section>
 
-     <Section title="Statistics">
-          <Statistics good={good} neutral={neutral } bad={bad} total={this.countTotalFeedback()} positivePercentage={this.countPositiveFeedbackPercentage()}></Statistics>
+      <Section title="Statistics">
+        <Statistics
+          good={good}
+          neutral={neutral}
+          bad={bad}
+          total={countTotalFeedback()}
+          positivePercentage={countPositiveFeedbackPercentage()}
+        ></Statistics>
       </Section>
-     
     </>
   );
-  }
 };
